@@ -13,6 +13,7 @@
   background-position: center;
   min-height: 100vh;
   position: relative;
+  color: white;
 }
 
 .App::before {
@@ -33,3 +34,4 @@
 .App > div {
   margin-right: 50px;
 }
+
