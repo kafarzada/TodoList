@@ -1,3 +1,25 @@
 .todoList_inner {
-    margin-right: 20px;
+    margin-right: 30px;
+}
+
+h3 {
+    font-size: 30px;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    padding: 3px 2px;
+}
+
+.header__todolist {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header__todolist p {
+    padding: 5px;
+    cursor: pointer;
+    font-size: 20px;
 }

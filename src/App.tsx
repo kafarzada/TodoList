@@ -78,14 +78,12 @@ function App() {
         }
     }
 
-    // if(filter === "active") {
-    //     tasksForTodoList = tasks.filter(t => t.isDone === false)
-    // }
 
-    // if(filter === "completed") {
-    //     tasksForTodoList = tasks.filter(t => t.isDone === true)
-    // }
-
+    function removeTodoList(id: string) {
+        setTodoLists(todoLists.filter( item => item.id !== id))
+        delete tasks[id];
+        setTasks({...tasks});
+    }
 
     
     return (
@@ -117,6 +115,7 @@ function App() {
                                 addTask={addTask} 
                                 changeTaskStauts = {changeStatus}
                                 filter={item.filter}
+                                removeTodoList={removeTodoList}
                             />
                         )
                     })
