@@ -7,13 +7,6 @@
 .App {
   padding: 30px;
   display: flex;
-  background-image: url("./bgTodo.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  position: relative;
-  color: white;
 }
 
 
