@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
-import {Button, TextField} from "@material-ui/core";
+import {Button, TextField, IconButton} from "@material-ui/core";
+import { AddBox } from '@material-ui/icons';
 
 type AddItemFormPropsType = {
     additem: (title: string) => void
@@ -26,7 +27,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
 
     
     return (
-        <div>
+        <div onBlur={() => {setError(null);}}>
             {/* <input 
                 className={error ? "error": ""}
                 type="text" 
@@ -49,13 +50,16 @@ const AddItemForm = (props: AddItemFormPropsType) => {
                         onAddItemClick()
                     } 
                 }}
-                className={error ? "error": ""}
+                error={!!error}
                 variant={"outlined"}
+                label={"Title"}
+                helperText={error}
             />
-            
-            <Button onClick={onAddItemClick} variant={"contained"} color={"primary"}>+</Button>
+            <IconButton  color={"primary"} onClick={onAddItemClick}>
+                <AddBox />
+            </IconButton>
             {/*<button onClick={() => { onAddItemClick }}>add</button>*/}
-            {error && <div className="error-message">{error}</div> }
+            {/* {error && <div className="error-message">{error}</div> } */}
         </div>
     )
 }
