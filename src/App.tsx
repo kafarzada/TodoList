@@ -13,7 +13,7 @@ type TaskType = {
     title: string
 }
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: FilterValueType
@@ -34,7 +34,6 @@ function App() {
         {id: todoListId2, title: "Songs", filter: "active"},
     ]);
     
-
     //такси тудулистов
     let [tasks, setTasks] = useState<TasksStateType>({
         [todoListId1] : [
@@ -48,7 +47,6 @@ function App() {
             {id: v1(), title: "GraphQl", isDone: false}
         ]
     });
-
 
     function changeStatus(id: string, isDone: boolean, taskId:string) {
         let todoListTasks = tasks[taskId]
@@ -68,15 +66,11 @@ function App() {
         }  
     }
 
-
-
     function removeTask(id: string, todoListId:string) {
         let todoListTasks = tasks[todoListId]
         tasks[todoListId] = todoListTasks.filter(t => t.id !== id);
         setTasks({...tasks});
     }
-
-
 
     function addTask(title: string, todoListId:string) {
         let newTask = {id: v1(), title: title, isDone: false};
@@ -84,7 +78,6 @@ function App() {
         tasks[todoListId] = [newTask, ...todoListTasks]
         setTasks({...tasks})
     }
-
 
     function changeFilter(id: string, value: FilterValueType) {
         let todolist = todoLists.find(item => item.id === id)
@@ -94,13 +87,11 @@ function App() {
         }
     }
 
-
     function removeTodoList(id: string) {
         setTodoLists(todoLists.filter( item => item.id !== id))
         delete tasks[id];
         setTasks({...tasks});
     }
-
 
     function addTodoList(title: string) {
         let newTodoListD = v1();
@@ -117,7 +108,6 @@ function App() {
         })
     }
 
-    
     return (
         <div className="App">
             <AppBar position="static">

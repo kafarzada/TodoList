@@ -1,6 +1,5 @@
 import React from 'react';
 import { FilterValueType } from './App'
-import s from './TodoList.module.css'
 import AddItemForm from './AddItemForm';
 import EditableSpan from './EditableSpan';
 import { IconButton, Button, Checkbox } from '@material-ui/core';
@@ -17,15 +16,13 @@ type PropsType = {
     title: string
     tasks: Array<TaskType>
     filter: FilterValueType
-    removeTask: (id: string, todoListId:string)                    => void
-    changeFilter: (id: string, value: FilterValueType )            => void
-    addTask: (title: string, todoListId:string)                    => void
-    changeTaskStauts: (id: string, isDone: boolean, taskId:string) => void
-    removeTodoList: (id:string)                                    => void
+    removeTask: (id: string, todoListId:string)                      => void
+    changeFilter: (id: string, value: FilterValueType )              => void
+    addTask: (title: string, todoListId:string)                      => void
+    changeTaskStauts: (id: string, isDone: boolean, taskId:string)   => void
+    removeTodoList: (id:string)                                      => void
     changeTaskTitle: (id: string, title: string, todoListID: string) => void
 }
-
-
 
 const TodoList = (props: PropsType) => {
 
@@ -55,9 +52,6 @@ const TodoList = (props: PropsType) => {
               </div>
     });
 
-
-
-
     const deleteTodoList = () => { props.removeTodoList(props.id) }
     const onAllChangeFilter = () => { props.changeFilter( props.id, "all"); }
     const onActiveChangeFilter = () => {  props.changeFilter( props.id, "active"); }
@@ -69,8 +63,8 @@ const TodoList = (props: PropsType) => {
 
  
     return (
-        <div className={s.todoList_inner}>
-            <div className={s.header__todolist}>
+        <div>
+            <div>
                 <h3>{props.title}</h3>
                 <IconButton onClick={deleteTodoList}>
                     <Delete />
@@ -82,19 +76,16 @@ const TodoList = (props: PropsType) => {
             </div>
             <div>
                 <Button 
-                        //className={props.filter === "all" ? "active-filter" : ""}
                         onClick={() => { onAllChangeFilter() }}
                         color={props.filter === 'all' ? 'secondary' : 'primary'}
                         variant={"outlined"}>All</Button>
 
                 <Button 
-                        //className={props.filter === "active" ? "active-filter" : ""} 
                         onClick={() => { onActiveChangeFilter() }}
                         color={props.filter === 'active' ? 'secondary' : 'primary'}
                         variant={"outlined"}>Active</Button>
 
                 <Button 
-                        //className={props.filter === "completed" ? "active-filter" : ""}
                         onClick={() => { onCompletedlChangeFilter() }}
                         color={props.filter === 'completed' ? 'secondary' : 'primary'}
                         variant={"outlined"}>Completed</Button>
