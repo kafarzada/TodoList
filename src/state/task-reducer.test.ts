@@ -7,8 +7,10 @@ import {
 import { TasksStateType, TodoListType } from "../App"
 import { AddTodolistActionCreactor, RemoveTodoListActionCreactor, todoListsReducer } from './todolists-reducer';
 
-test('correct task should be deleted from correct array', () => {
-    const startState: TasksStateType ={
+let startState:TasksStateType;
+
+beforeEach(() => { //  после каждого теста вызывается
+     startState = {
         "todolistId1": [
             { id: "1", title: "CSS", isDone: false },
             { id: "2", title: "JS", isDone: true },
@@ -20,7 +22,9 @@ test('correct task should be deleted from correct array', () => {
             { id: "3", title: "tea", isDone: false }
         ]
     };
+})
 
+test('correct task should be deleted from correct array', () => {
     const action = removeTasksActionCreator('2', 'todolistId2');
     const endState = tasksReducer(startState, action)
 
@@ -31,19 +35,6 @@ test('correct task should be deleted from correct array', () => {
 })
 
 test('current task should be added to correct array', () => {
-    const startState: TasksStateType ={
-        "todolistId1": [
-            { id: "1", title: "CSS", isDone: false },
-            { id: "2", title: "JS", isDone: true },
-            { id: "3", title: "React", isDone: false }
-        ],
-        "todolistId2": [
-            { id: "1", title: "bread", isDone: false },
-            { id: "2", title: "milk", isDone: true },
-            { id: "3", title: "tea", isDone: false }
-        ]
-    };
-
     const action = addTaskActionCreator("juce", "todolistId2")
     const endState = tasksReducer(startState, action)
 
@@ -55,19 +46,6 @@ test('current task should be added to correct array', () => {
 })
 
 test('status of specified task should be changed', () => {
-    const startState: TasksStateType ={
-        "todolistId1": [
-            { id: "1", title: "CSS", isDone: false },
-            { id: "2", title: "JS", isDone: true },
-            { id: "3", title: "React", isDone: false }
-        ],
-        "todolistId2": [
-            { id: "1", title: "bread", isDone: false },
-            { id: "2", title: "milk", isDone: true },
-            { id: "3", title: "tea", isDone: false }
-        ]
-    };
-
     const action = changeTaskStatusActionCreator("2", false, "todolistId2")
     const endState = tasksReducer(startState, action)
 
@@ -75,18 +53,6 @@ test('status of specified task should be changed', () => {
 })
 
 test('title of specified task should be changed', () => {
-    const startState: TasksStateType ={
-        "todolistId1": [
-            { id: "1", title: "CSS", isDone: false },
-            { id: "2", title: "JS", isDone: true },
-            { id: "3", title: "React", isDone: false }
-        ],
-        "todolistId2": [
-            { id: "1", title: "bread", isDone: false },
-            { id: "2", title: "milk", isDone: true },
-            { id: "3", title: "tea", isDone: false }
-        ]
-    };
     const action = changeTaskTitleActionCreator("2", "React", "todolistId2")
     const endState = tasksReducer(startState, action)
 
@@ -95,24 +61,9 @@ test('title of specified task should be changed', () => {
 
 
 test('new array should be added when new todolistIs added' ,() => {
-    const startState: TasksStateType ={
-        "todolistId1": [
-            { id: "1", title: "CSS", isDone: false },
-            { id: "2", title: "JS", isDone: true },
-            { id: "3", title: "React", isDone: false }
-        ],
-        "todolistId2": [
-            { id: "1", title: "bread", isDone: false },
-            { id: "2", title: "milk", isDone: true },
-            { id: "3", title: "tea", isDone: false }
-        ]
-    };
-
     let startTodoList: Array<TodoListType> = []
-
     const action = AddTodolistActionCreactor('new TodoList');
     const endState = tasksReducer(startState, action);
-
     const endStateTodoList = todoListsReducer(startTodoList, action)
 
     const keys = Object.keys(endState);
@@ -129,22 +80,8 @@ test('new array should be added when new todolistIs added' ,() => {
 });
 
 test('array should be deleted when todolist deleted' ,() => {
-    const startState: TasksStateType ={
-        "todolistId1": [
-            { id: "1", title: "CSS", isDone: false },
-            { id: "2", title: "JS", isDone: true },
-            { id: "3", title: "React", isDone: false }
-        ],
-        "todolistId2": [
-            { id: "1", title: "bread", isDone: false },
-            { id: "2", title: "milk", isDone: true },
-            { id: "3", title: "tea", isDone: false }
-        ]
-    };
-
     const action = RemoveTodoListActionCreactor('todolistId2');
     const endState = tasksReducer(startState, action);
-
     const keys = Object.keys(endState);
 
     expect(keys.length).toBe(1)

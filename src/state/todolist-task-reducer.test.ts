@@ -36,7 +36,6 @@ test('ids should be equals', () => {
     };
  
     const action = RemoveTodoListActionCreactor("todolistId2");
- 
     const endState = tasksReducer(startState, action)
  
  
